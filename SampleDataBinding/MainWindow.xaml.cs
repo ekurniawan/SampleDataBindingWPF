@@ -20,9 +20,11 @@ namespace SampleDataBinding
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string Nama { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            Nama = "Erick";
         }
     }
 }
