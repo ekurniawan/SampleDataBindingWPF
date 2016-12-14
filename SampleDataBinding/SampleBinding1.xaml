@@ -8,32 +8,39 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="SampleBinding1" Height="300" Width="300">
+    <Window.Resources>
+        <local:CekNimConverter x:Key="ceknim" />
+        <s:String x:Key="val">Erick Kurniawan</s:String>
+        <DataTemplate DataType="{x:Type local:Mahasiswa}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Nim :" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Text="{Binding Nim}" Grid.Column="1" />
+                <TextBlock Text="Nama :" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Text="{Binding Nama}" Grid.Column="1" Grid.Row="1" />
+                <TextBlock x:Name="tbIPK" Text="IPK :" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Text="{Binding IPK}" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Right" />
+            </Grid>
+
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Converter={StaticResource ceknim},Path=IPK}" Value="true">
+                    <Setter TargetName="tbIPK" Property="Foreground" Value="Red" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+    </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <StackPanel.Resources>
-                <s:String x:Key="val">Erick Kurniawan</s:String>
-                <!--<DataTemplate DataType="{x:Type local:Mahasiswa}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="35" />
-                            <RowDefinition Height="35" />
-                            <RowDefinition Height="35" />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="Nim :" />
-                        <TextBox Text="{Binding Nim}" Grid.Column="1" />
-                        <TextBlock Text="Nama :" Grid.Row="1" />
-                        <TextBox Text="{Binding Nama}" Grid.Column="1" Grid.Row="1" />
-                        <TextBlock Text="IPK :" Grid.Row="2" />
-                        <TextBox Text="{Binding IPK}" Grid.Column="1" Grid.Row="2" />
-                    </Grid>
-                </DataTemplate>-->
-            </StackPanel.Resources>
-
             <!--<TextBlock FontSize="32" Text="{Binding ElementName=txtNama,Path=Text}" />
         <TextBox x:Name="txtNama" FontSize="22" 
                  Text="{Binding ElementName=txtCopyNama,Path=Text}"  />
@@ -42,28 +49,6 @@
         <Slider x:Name="slider" Minimum="0" Maximum="100" />-->
 
             <ListBox ItemsSource="{Binding ListMahasiswa}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35" />
-                                <RowDefinition Height="35" />
-                                <RowDefinition Height="35" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Text="Nim :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBox Text="{Binding Nim}" Grid.Column="1" />
-                            <TextBlock Text="Nama :" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBox Text="{Binding Nama}" Grid.Column="1" Grid.Row="1" />
-                            <TextBlock Text="IPK :" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBox Text="{Binding IPK}" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Right" />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
             </ListBox>
 
         </StackPanel>

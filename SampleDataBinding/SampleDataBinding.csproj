@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CekNimConverter.cs" />
     <Compile Include="Mahasiswa.cs" />
     <Compile Include="MahasiswaViewModel.cs" />
     <Compile Include="SampleBinding1.xaml.cs">
