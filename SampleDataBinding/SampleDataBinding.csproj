@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,8 +58,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CekNimConverter.cs" />
+    <Compile Include="Dosen.cs" />
     <Compile Include="Mahasiswa.cs" />
     <Compile Include="MahasiswaViewModel.cs" />
+    <Compile Include="MasterDetailSample.xaml.cs">
+      <DependentUpon>MasterDetailSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SampleBinding1.xaml.cs">
       <DependentUpon>SampleBinding1.xaml</DependentUpon>
     </Compile>
@@ -73,6 +79,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MasterDetailSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SampleBinding1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
