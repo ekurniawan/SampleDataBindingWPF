@@ -19,17 +19,11 @@ namespace SampleDataBinding
     /// </summary>
     public partial class SampleBinding1 : Window
     {
-        public List<Mahasiswa> listMahasiswa;
         public SampleBinding1()
         {
             InitializeComponent();
-
-            listMahasiswa = new List<Mahasiswa>() {
-                new Mahasiswa { Nim = "22002321", Nama = "Budi", IPK = 3.2 },
-                new Mahasiswa { Nim = "22002322", Nama = "Erick", IPK = 3.3 },
-                new Mahasiswa { Nim = "22002323", Nama = "Joko", IPK = 3.8 }};
-
-            this.DataContext = listMahasiswa;
+            this.DataContext = new MahasiswaViewModel();
+           
         }
     }
 }
