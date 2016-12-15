@@ -1,40 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SampleDataBinding
 {
-    public class MahasiswaViewModel
+    public class MahasiswaViewModel : INotifyPropertyChanged
     {
-        private List<Mahasiswa> listMahasiswa;
-        public List<Mahasiswa> ListMahasiswa
+        private ObservableCollection<Mahasiswa> listMahasiswa;
+        public ObservableCollection<Mahasiswa> ListMahasiswa
         {
             get { return listMahasiswa; }
-            set { listMahasiswa = value; }
+            set
+            {
+                if (value != listMahasiswa)
+                {
+                    listMahasiswa = value;
+                    OnPropertyChanged("ListMahasiswa");
+                }
+            }
         }
 
         public MahasiswaViewModel()
         {
-            ListMahasiswa = new List<Mahasiswa>() {
-                new Mahasiswa { Nim = "22002321", Nama = "Budi", IPK = 3.2,IPS=3.9 },
+            ListMahasiswa = new ObservableCollection<Mahasiswa>(new List<Mahasiswa>() {
+                new Mahasiswa { Nim = "22002329", Nama = "Zack", IPK = 3.9,IPS=3.9 },
                 new Mahasiswa { Nim = "22002322", Nama = "Erick", IPK = 3.3,IPS=3.7 },
-                new Mahasiswa { Nim = "22002323", Nama = "Joko", IPK = 3.8,IPS=2.8 }};
+                new Mahasiswa { Nim = "22002323", Nama = "Joko", IPK = 3.8,IPS=2.8 }
+            });
 
-            ListDosen = new List<Dosen>()
+            ListDosen = new ObservableCollection<Dosen>(new List<Dosen>()
             {
                 new Dosen {Nik="478899",Nama="Bambang",Alamat="Jl Mangga 11" },
                 new Dosen {Nik="5589FF",Nama="Joko",Alamat="Jl Rambutan 12" },
                 new Dosen {Nik="334455",Nama="Christ",Alamat="Jl Duren 10" }
-            };
+            });
         }
 
-        private List<Dosen> listDosen;
-        public List<Dosen> ListDosen
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private ObservableCollection<Dosen> listDosen;
+        public ObservableCollection<Dosen> ListDosen
         {
             get { return listDosen; }
-            set { listDosen = value; }
+            set
+            {
+                if (value != listDosen)
+                {
+                    listDosen = value;
+                    OnPropertyChanged("ListDosen");
+                }
+            }
         }
 
     }

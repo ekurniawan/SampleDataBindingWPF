@@ -1,0 +1,94 @@
+﻿<Window x:Class="SampleDataBinding.SampleCollectionViewSource"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SampleDataBinding"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        mc:Ignorable="d"
+        Title="SampleCollectionViewSource" Height="600" Width="800">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="src" ObjectType="{x:Type local:MahasiswaViewModel}" />
+        <CollectionViewSource x:Key="cvsMhs" Source="{Binding Source={StaticResource src},
+                Path=ListMahasiswa}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Nama" Direction="Descending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="cvsDosen" Source="{Binding Source={StaticResource src},
+            Path=ListDosen}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Nama" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200*" />
+                <ColumnDefinition Width="200*" />
+            </Grid.ColumnDefinitions>
+            <Grid DataContext="{StaticResource cvsMhs}">
+                <StackPanel>
+                    <ListBox ItemsSource="{Binding}" 
+                     IsSynchronizedWithCurrentItem="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nama}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel>
+                        <Label Content="_Nim" Target="{Binding ElementName=txtNim}" />
+                        <TextBox x:Name="txtNim" Text="{Binding Nim}" Width="200" Height="30" />
+                        <Label Content="_Nama" Target="{Binding ElementName=txtNama}" />
+                        <TextBox x:Name="txtNama" Text="{Binding Nama}" Width="200" Height="30" />
+                        <Label Content="_IPK" Target="{Binding ElementName=txtIPK}" />
+                        <TextBox x:Name="txtIPK" Text="{Binding IPK}" Width="200" Height="30" />
+                        <Label Content="_IPS" Target="{Binding ElementName=txtIPS}" />
+                        <TextBox x:Name="txtIPS" Text="{Binding IPS}" Width="200" Height="30" />
+                        <Label Content="_IPR" Target="{Binding ElementName=txtIPR}" />
+                        <TextBox x:Name="txtIPR" Text="{Binding Path=IPR,Mode=OneWay}" Width="200" Height="30" />
+                        <Label Content="Val" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="txtVal" Width="200" Height="30" />
+                            <Button x:Name="btnCheckVal" Content="Check" Width="100" Height="30"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnUpdateMhs" Content="Update Mhs" Width="60" Height="35" />
+                        <Button x:Name="btnNewMhs" Content="New" Width="60" Height="35" />
+                        <Button x:Name="btnDelete" Content="Delete" Width="60" Height="35" />
+                        <Button x:Name="btnShowMhs" Content="Show" Width="60" Height="35" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" DataContext="{StaticResource cvsDosen}">
+                <StackPanel>
+                    <ListBox ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nama}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel>
+                        <Label Content="_Nik" Target="{Binding ElementName=txtNik}" />
+                        <TextBox x:Name="txtNik" Text="{Binding Nik}" Width="200" Height="30" />
+                        <Label Content="_Nama" Target="{Binding ElementName=txtNamaDosen}" />
+                        <TextBox x:Name="txtNamaDosen" Text="{Binding Nama}" Width="200" Height="30" />
+                        <Label Content="_Alamat" Target="{Binding ElementName=txtAlamat}" />
+                        <TextBox x:Name="txtAlamat" Text="{Binding Alamat}" Width="200" Height="30" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnUpdateDosen" Content="Update Dosen" Width="100" Height="35" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
